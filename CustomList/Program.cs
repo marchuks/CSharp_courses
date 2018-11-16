@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Collections;
 
 namespace CustomList
 {
@@ -108,9 +109,31 @@ namespace CustomList
         {
             return _length;
         }
+
+        public void Empty()
+        {
+            Item<T> ptr = _start;
+
+            while (ptr.next != null)
+            {
+                ptr = ptr.next;
+                ptr.prev.data = default(T);
+                ptr.prev= null;
+            }
+            _length = 0;
+        }
+
+        public IEnumerator<T> GetEnumerator()
+        {
+            Item<T> ptr = _start;
+
+            while (ptr.next != null)
+            {
+                yield return ptr.data;
+                ptr = ptr.next;
+            }
+        }
     }
-
-
 
     class Program
     {
