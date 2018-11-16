@@ -139,14 +139,96 @@ namespace CustomList
     {
         static void Main(string[] args)
         {
+            Console.WriteLine("::CustomList tests::");
+
             CustomList<string> myList = new CustomList<string>();
-            myList.Add("firtVal");
-            myList.Add("secVal");
-            myList.Add("thirdVal");
-            myList[1] = "newSecVal";
-            Console.WriteLine(myList[1]);
-            myList.Del(1);
-            Console.WriteLine(myList[1]);
+            Console.WriteLine("Object creation: " + (myList != null ? "success" : "fail"));
+
+            Console.Write("Try to add 3 objects: ");
+            try
+            {
+                myList.Add("firtVal");
+                myList.Add("secVal");
+                myList.Add("thirdVal");
+                Console.WriteLine("success");
+            }
+            catch
+            {
+                Console.WriteLine("fail");
+            }
+
+            Console.Write("Set second value by index: ");
+            try
+            {
+                myList[1] = "newSecVal";
+                Console.WriteLine("success");
+            }
+            catch
+            {
+                Console.WriteLine("fail");
+            }
+
+            Console.WriteLine("Get second value by index: ");
+            try
+            {
+                Console.WriteLine("  myList[1] = " + myList[1]);
+                Console.WriteLine("Get second value by index: success");
+            }
+            catch
+            {
+                Console.WriteLine("Get second value by index: fail");
+            }
+
+            /* Removing by index */
+            Console.Write("Remove third record by index: ");
+            try
+            {
+                myList.Del(2);
+                Console.WriteLine("success");
+            }
+            catch
+            {
+                Console.WriteLine("fail");
+            }
+            Console.WriteLine("Test enumerator: ");
+            try
+            {
+                foreach (var elem in myList)
+                {
+                    Console.WriteLine("  elem = " + elem);
+                }
+                Console.WriteLine("Test enumerator: success");
+            }
+            catch
+            {
+                Console.WriteLine("Test enumerator: fail");
+            }
+
+            Console.Write("Del non-existing index: ");
+            try
+            {
+                myList.Del(11);
+                Console.WriteLine("fail");
+            }
+            catch
+            {
+                Console.WriteLine("success");
+            }
+
+            Console.Write("Access to non-existing index: ");
+            try
+            {
+                myList[11] = "";
+                Console.WriteLine("fail");
+            }
+            catch
+            {
+                Console.WriteLine("success");
+            }
+
+            myList.Empty();
+            Console.Write("Empty List: " + (myList.getLength() == 0 ? "success" : "fail"));
+
             Console.ReadKey();
         }
     }
